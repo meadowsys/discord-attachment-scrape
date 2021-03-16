@@ -1,4 +1,4 @@
-# discord-img-scrape
+# discord-attachment-scrape
 
 fetches all the messages from a channel and downloads their attachments
 
