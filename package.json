@@ -1,0 +1,23 @@
+{
+   "name": "discord-img-scrape",
+   "version": "0.1.0",
+   "description": "scrape images off of a discord channel",
+   "main": "build/index.js",
+   "private": true,
+   "scripts": {
+      "build": "tsc",
+      "start": "node build"
+   },
+   "repository": {
+      "type": "git",
+      "url": "git+https://github.com/autumnblazey/discord-img-scrape.git"
+   },
+   "author": "Alexander Liu (autumnblazey)",
+   "license": "MIT",
+   "devDependencies": {
+      "typescript": "^4.2.3"
+   },
+   "dependencies": {
+      "discord.js": "^12.5.1"
+   }
+}
