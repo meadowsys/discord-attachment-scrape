@@ -19,13 +19,13 @@ client.on("ready", async () => {
    // DO STUFF
 
    // fetch channel and validate type
-   process.stdout.write("getting channel... ");
+   process.stdout.write("fetching channel... ");
    const channel = await client.channels.fetch(`${channelid}`);
    if (!channel.isText()) die("channel isnt a text channel!");
    console.log("done");
 
    // fetch all messages
-   process.stdout.write("getting messages... ")
+   process.stdout.write("fetching messages... ")
    const allmsgs: Array<Message> = [];
    let before: string | undefined = undefined;
    while (true) {
@@ -37,10 +37,11 @@ client.on("ready", async () => {
       allmsgs.push(...Array.from(msgs.values()));
       before = msgs.lastKey();
    }
-   console.log("done");
+   process.stdout.write("done");
 
    // verify that there are messages in this channel
-   if (allmsgs.length === 0) return disconnectdiscord() && void console.log("no messages found in this channel!");
+   if (allmsgs.length === 0) return disconnectdiscord() && void console.log(", no messages found in this channel!");
+   else console.log(`, got ${allmsgs.length} messages`);
 
    allmsgs.reverse(); // start from oldest and go to newest
    const getter = bent("buffer", 200);
@@ -87,7 +88,7 @@ client.on("ready", async () => {
    console.log("done");
 
    disconnectdiscord();
-   console.log("disconnected from discord");
+   console.log("disconnecting from discord... done");
 
    // write the files to disk
    process.stdout.write("writing images... ");
@@ -109,8 +110,12 @@ client.on("ready", async () => {
 
    fs.writeFileSync(path.resolve(dir, "./__REPORT.txt"), reportfile.join("\n"));
    console.log("done");
+   console.log(`images have been put in "${dir}"`);
 });
 
+process.on("exit", () => {
+   disconnectdiscord();
+});
 function die(msg: string): never {
    console.error(msg);
    process.exit(64);
