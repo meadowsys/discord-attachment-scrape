@@ -1,0 +1,5 @@
+# the output dir for images
+# program tries to avoid overwriting files already in this directory
+
+*
+!.gitignore
